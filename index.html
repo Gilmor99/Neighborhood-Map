@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="css/styles.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neighborhood Map</title>
+</head>
+
+<body>
+    <div class="main container-fluid">
+        <div id="header" class="navbar-inverse navbar-fixed-top" data-bind="template: { afterRender: updateList }">
+          <div class="text-left navbar-header">
+              <h4 style="color:white"> Find restuarants by - </h4>
+              <h5 id="location">
+                <span style="color:white"> Location  :</span>
+                <input data-bind="textInput: mapLocation, event: { change: updateList }," />
+            </h5>
+              <h5 id="foodType">
+                  <span style="color:white"> Food Type:</span>
+                  <input data-bind="textInput: foodCategory, event: { change: updateList }" />
+              </h5>
+
+              <div id="errorMessage" class="alert alert-warning collapse" role="alert" id="myalert"            style="display:none;">
+                 <p>Location Error or Bad Connection, Please try again!</p>
+             </div>
+          </div>
+        </div>
+    </div>
+    <div id="data" class="main container-fluid">
+        <div id="leftPanel" class="col-xs-4 pull-left">
+            <div id="listings" class="list-group" data-bind="foreach: venuesList">
+               <p class="list-group-item" data-bind="text: name, click: $parent.setVenue"></p>
+           </div>
+        </div>
+        <div id="gMap" class="col-xs-8 pull-right"></div>
+    </div>
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script async defer src=
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyCXT1X7sgg7AZ7Fkrh__lQZHSCbO65tCBw&v=3&callback=initMap">
+    </script>
+    <script src="js/lib/knockout-3.2.0.js"></script>
+    <script src="js/lib/knockout.mapping-latest.js"></script>
+    <script src="js/g-map.js"></script>
+    <script src="js/app.js"></script>
+
+
+</body>
+</html>
