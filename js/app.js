@@ -5,7 +5,7 @@ Building a neighborhood data model by inquring Foursquare with initila value of 
 var venue = function(data){
     this.name = ko.observable(data.name);
     this.address = ko.observable(data.location.formattedAddress[0] + ' ' + data.location.formattedAddress[1] + ' ' + data.location.formattedAddress[2]);
-    this.categories = ko.observable(data.categories);
+    this.category = ko.observable(data.categories[0].shortname);
     this.lat = ko.observable(data.location.lat);
     this.lng = ko.observable(data.location.lng);
 };
@@ -16,8 +16,8 @@ var ViewModel = function() {
 
     this.venuesList = ko.observableArray([]);
     this.mapLocation = ko.observable("98005");    // Initial value
-    this.foodCategory = ko.observable("Sushi");  // Initial selection
-
+    this.query = ko.observable(''); // Initial selection
+    this.queryResults = ko.observableArray([]);
 
     updateList = function() {
         // Setting the query paramters to FourSquare to retrive the venues list
@@ -29,7 +29,7 @@ var ViewModel = function() {
             'client_secret' : foursquareClientSecret,
             'near' : self.mapLocation,
             'intent' : 'browse',
-            'query': self.foodCategory,
+             // 'query': self.foodCategory,
             'categoryId': '4d4b7105d754a06374d81259', //looking for the Food Category
             'v' : '20170101'
         };
@@ -41,11 +41,11 @@ var ViewModel = function() {
             async: true,
             data: forsquareSearchParms,
             success: function(data){
-                //console.log(data);
+                // console.log(data);
                 self.venuesList.removeAll();
                 data.response.venues.forEach(function (venueItem){
                     self.venuesList.push(new venue(venueItem));
-                    showListings(ko.toJS(self.venuesList));
+
                 });
                 $('#myalert').hide();
               },
@@ -53,12 +53,28 @@ var ViewModel = function() {
                   $('#myalert').show();
               },
             });
-    };
-    this.currentVenue = ko.observable( this.venuesList[0]);
+
+        };
+
+    this.searchResults = ko.computed(function () {
+        if (this.query()) {
+            var search = this.query().toLowerCase();
+            this.queryResults = ko.utils.arrayFilter(this.venuesList(), function (venueItem) {
+                return venueItem.name().toLowerCase().indexOf(search) >= 0;
+            });
+        } else {
+            this.queryResults = self.venuesList();
+        }
+        showListings(ko.toJS(this.queryResults));
+        // console.log(ko.toJS(this.queryResults));
+        return this.queryResults;
+    }, this, {deferEvaluation: true});
+
+    this.currentVenue = ko.observable( self.queryResults[0]);
     this.setVenue = function(clickedVenue) {
         // adding listener to each venue. ipon click firing the associated map marke
         self.currentVenue(clickedVenue);
-        populateInfoWindow(markers[self.venuesList.indexOf(clickedVenue)]);
+        populateInfoWindow(markers[self.queryResults.indexOf(clickedVenue)]);
     };
 
 };

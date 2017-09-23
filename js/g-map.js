@@ -1,10 +1,10 @@
+// Google Maps Functions
 
       var map;
 
 
       // Create a new blank array for all the  markers.
       var markers = [];
-
 
       function initMap() {
         // Constructor creates a new map - only center and zoom are required.
@@ -13,7 +13,6 @@
           zoom: 13,
           mapTypeControl: false
         });
-
     }
 
       // This function populates the infowindow when the marker is clicked. We'll only allow
@@ -30,27 +29,26 @@
           infowindow.addListener('closeclick', function() {
             infowindow.marker = null;
           });
-        }
       }
+    }
 
       // This function will loop through the markers array and display them all.
-      function showListings(venuesList) {
-
+      function showListings(queryResults) {
 
           var largeInfowindow = new google.maps.InfoWindow();
-          //console.log(venuesList)
+          //console.log(searchResults)
 
           //Delete previous markers from the map
           hideListings();
 
           // The following group uses the Observable venueList to create an array of markers when the list of venues is updated.
-          for (var i = 0; i < venuesList.length; i++) {
+          for (var i = 0; i < queryResults.length; i++) {
             // Get the position from the location array.
             var position  = {
-                lat : venuesList[i].lat,
-                lng : venuesList[i].lng
+                lat : queryResults[i].lat,
+                lng : queryResults[i].lng
             };
-            var title = venuesList[i].name;
+            var title = queryResults[i].name;
 
             // Create a marker per location, and put into markers array.
              var marker = new google.maps.Marker({
