@@ -2,12 +2,12 @@
 /*
 Building a neighborhood data model by inquring Foursquare with initila value of zip code 98005
 */
-var venue = function(data){
-    this.name = ko.observable(data.name);
-    this.address = ko.observable(data.location.formattedAddress[0] + ' ' + data.location.formattedAddress[1] + ' ' + data.location.formattedAddress[2]);
-    this.category = ko.observable(data.categories[0].shortname);
-    this.lat = ko.observable(data.location.lat);
-    this.lng = ko.observable(data.location.lng);
+var Venue = function(data){
+    this.name = data.name;
+    this.address = data.location.formattedAddress[0] + ' ' + data.location.formattedAddress[1] + ' ' + data.location.formattedAddress[2];
+    this.category = data.categories[0].shortName;
+    this.lat = data.location.lat;
+    this.lng = data.location.lng;
 };
 
 var ViewModel = function() {
@@ -41,10 +41,10 @@ var ViewModel = function() {
             async: true,
             data: forsquareSearchParms,
             success: function(data){
-                // console.log(data);
+                //console.log(data);
                 self.venuesList.removeAll();
                 data.response.venues.forEach(function (venueItem){
-                    self.venuesList.push(new venue(venueItem));
+                    self.venuesList.push(new Venue(venueItem));
 
                 });
                 $('#myalert').hide();
@@ -56,11 +56,11 @@ var ViewModel = function() {
 
         };
 
-    this.searchResults = ko.computed(function () {
+    searchResults = ko.computed(function () {
         if (this.query()) {
             var search = this.query().toLowerCase();
             this.queryResults = ko.utils.arrayFilter(this.venuesList(), function (venueItem) {
-                return venueItem.name().toLowerCase().indexOf(search) >= 0;
+                return venueItem.name.toLowerCase().indexOf(search) >= 0;
             });
         } else {
             this.queryResults = self.venuesList();

@@ -11,47 +11,51 @@ body {
 
 input {
   font-size: 12px;
+  color: black;
 }
 
-h1,
-h3 {
-  color: #525454;
-  font-size: 22px;
+
+span {
+  color: white;
   margin: 0 0 10px 0;
-  text-align: center;
 }
 
 .main {
-    flex: 1 1 0;
-    display: flex;
+  flex: 1 1 0;
+  display: flex;
 }
 .container-fluid {
-    display: flex;
+  display: flex;
 }
 
 .list-group {
-    overflow: auto;
-    max-height: 900px;
-    margin-left: 0px;
+  overflow: auto;
+  max-height: 900px;
+  margin-left: 0px;
 
 }
 .navbar-header {
-    text-align: left;
-    bottom: 0;
-    width: 100%;
+  text-align: left;
+  bottom: 0;
+  width: 100%;
 }
 
 
 .col-xs-4 {
-    margin-top: 0;
-    height:auto;
+  margin-top: 0;
+  height:auto;
 
 }
 
 #map {
+  top : 60px;
   bottom:0px;
   right: 0px;
   height: 100%;
   max-height: 100%;
   position: absolute;
+}
+
+#myalert {
+  display: none;
 }

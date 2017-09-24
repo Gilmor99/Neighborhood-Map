@@ -11,11 +11,11 @@ Getting Started -
 
 How to use the application -
     1. Select the location you want to search food venues in.
-    2. Select the specific food type you want to see results for.
-    3. Results will be updated on the left panel with associated markers on the Google Maps in the right side window.
+    2. Results will be updated on the left panel with associated markers on the Google Maps in the right side window.
+    3. Filter by results name to show partial listings.
     4. Any change in the selection fields will update the respective data automatically.
-    Initial values are for the zip code "98005" with "Sushi" as the initial food type.
-    5. Clicking on the Food Venue in the venues list, will highlight associated marker on the G-Map and will center the map to the selected venue.
+    Initial values are for the zip code "98005".
+    5. Clicking on the Food Venue in the venues list, will bounce associated marker on the G-Map and will center the map to the selected venue.
     6. Enjoy !
 
 
