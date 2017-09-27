@@ -19,8 +19,15 @@ var ViewModel = function() {
     this.query = ko.observable(''); // Initial selection
     this.queryResults = ko.observableArray([]);
 
+    ClearQueryBox = function(){
+    // Clear the filter text box upon new location search
+      self.query('');
+    };
+
+
     updateList = function() {
         // Setting the query paramters to FourSquare to retrive the venues list
+        ClearQueryBox();
         var foursquareClientID = 'KJXASR1JSSF2WM4CESIZ2IFICH2ELPXK1WXE1T4FBQ1A5H5X';
         var foursquareClientSecret = '0G1MUWJDN3P5GNYWLAVC12SNTBE1TZTPANYPHWMLMT3LRSB4';
         var foursquareSearchURI = 'https://api.foursquare.com/v2/venues/search';
@@ -45,8 +52,8 @@ var ViewModel = function() {
                 self.venuesList.removeAll();
                 data.response.venues.forEach(function (venueItem){
                     self.venuesList.push(new Venue(venueItem));
-
-                });
+                                });
+                showListings(ko.toJS(self.venuesList));
                 $('#myalert').hide();
               },
               error: function(e) {
@@ -65,18 +72,25 @@ var ViewModel = function() {
         } else {
             this.queryResults = self.venuesList();
         }
-        showListings(ko.toJS(this.queryResults));
-        // console.log(ko.toJS(this.queryResults));
+        // hide unhide the markers as the filter progress on screen.
+        for (var i = 0; i < markers.length; i++) {
+            for (var j = 0; j < this.queryResults.length; j++) {
+                if (markers[i].title === this.queryResults[j].name) {
+                    markers[i].setMap(map);
+                    break;
+                } else {
+                    markers[i].setMap(null);
+                }
+            }
+        }
         return this.queryResults;
     }, this, {deferEvaluation: true});
 
     this.currentVenue = ko.observable( self.queryResults[0]);
     this.setVenue = function(clickedVenue) {
-        // adding listener to each venue. ipon click firing the associated map marke
+        // adding listener to each venue. upon click firing the associated map marker
         self.currentVenue(clickedVenue);
-        populateInfoWindow(markers[self.queryResults.indexOf(clickedVenue)]);
+        populateInfoWindow(markers[self.venuesList.indexOf(clickedVenue)]);
     };
 
 };
-
-ko.applyBindings(new ViewModel());

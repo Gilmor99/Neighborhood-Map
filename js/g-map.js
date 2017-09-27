@@ -13,6 +13,7 @@ function initMap() {
       mapTypeControl: false
     });
     $('#myalert').hide();
+    ko.applyBindings(new ViewModel());
 }
 
 // Error callback for GMap API request
@@ -90,5 +91,5 @@ function hideListings() {
   for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(null);
     }
-    markers.length = 0;
+    markers = [];
 }

@@ -17,7 +17,7 @@
               <h4> <span>Find food venues by - </span> </h4>
               <h5 id="location">
                 <span> Location  :</span>
-                <input data-bind="textInput: mapLocation, event: { change: updateList }"/>
+                <input data-bind="textInput: mapLocation, event: { change: updateList, ClearQueryBox }"/>
             </h5>
               <h5 id="filter">
                   <span> Filter by business name:</span>
@@ -30,9 +30,9 @@
           </div>
     </header>
     <main id="data" class="main container-fluid">
-        <map id="map" class="col-xs-8 pull-right"></map>
+        <map name="map" id="map" class="col-xs-8 pull-right"></map>
         <aside id="leftPanel" class="col-xs-4 pull-left">
-            <div id="listings" class="list-group" data-bind="foreach: searchResults">
+            <div id="listings" class="list-group" data-bind="foreach: searchResults()">
                <p class="list-group-item" data-bind="text: name, click: $parent.setVenue"></p>
            </div>
        </aside>
