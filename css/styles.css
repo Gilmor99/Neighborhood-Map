@@ -51,6 +51,7 @@ main {
     margin-top: 100px;
 }
 #map {
+  top: 100px;
   bottom:0px;
   right: 0px;
   height: 100%;

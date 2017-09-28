@@ -74,12 +74,16 @@ var ViewModel = function() {
         }
         // hide unhide the markers as the filter progress on screen.
         for (var i = 0; i < markers.length; i++) {
-            for (var j = 0; j < this.queryResults.length; j++) {
-                if (markers[i].title === this.queryResults[j].name) {
-                    markers[i].setMap(map);
-                    break;
-                } else {
-                    markers[i].setMap(null);
+            if (this.queryResults.length <1) {
+                markers[i].setMap(null);
+            } else {
+                for (var j = 0; j < this.queryResults.length; j++) {
+                    if (markers[i].title === this.queryResults[j].name) {
+                        markers[i].setMap(map);
+                        break;
+                    } else {
+                        markers[i].setMap(null);
+                    }
                 }
             }
         }
