@@ -17,7 +17,7 @@
               <h4> <span>Find food venues by - </span> </h4>
               <h5 id="location">
                 <span> Location  :</span>
-                <input data-bind="textInput: mapLocation, event: { change: updateList, ClearQueryBox }"/>
+                <input data-bind="textInput: mapLocation, event: { change: updateList}"/>
             </h5>
               <h5 id="filter">
                   <span> Filter by business name:</span>
@@ -45,7 +45,7 @@
     <script src="js/app.js"></script>
     <script src="js/g-map.js"></script>
     <script src=
-        "https://maps.googleapis.com/maps/api/js?key=AIzaSyCXT1X7sgg7AZ7Fkrh__lQZHSCbO65tCBw&v=3&callback=initMap" defer onerror="mapError()" >
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyCXT1X7sgg7AZ7Fkrh__lQZHSCbO65tCBw&v=3&callback=initMap" async defer onerror="mapError()" >
     </script>
 
 
