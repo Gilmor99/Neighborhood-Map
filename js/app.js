@@ -75,14 +75,14 @@ var ViewModel = function() {
         // hide unhide the markers as the filter progress on screen.
         for (var i = 0; i < markers.length; i++) {
             if (this.queryResults.length <1) {
-                markers[i].setMap(null);
+                markers[i].setVisible(false);
             } else {
                 for (var j = 0; j < this.queryResults.length; j++) {
                     if (markers[i].title === this.queryResults[j].name) {
-                        markers[i].setMap(map);
+                        markers[i].setVisible(true);
                         break;
                     } else {
-                        markers[i].setMap(null);
+                        markers[i].setVisible(false);
                     }
                 }
             }

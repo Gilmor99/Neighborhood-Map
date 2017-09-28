@@ -33,7 +33,7 @@ function mapError() {
       infowindow.open(map, marker);
       // Add animation to the clicked marker, then stop it
       marker.setAnimation(google.maps.Animation.BOUNCE);
-      setTimeout(function(){ marker.setAnimation(null); }, 750);
+      setTimeout(function(){ marker.setAnimation(null); }, 1400);
     }
       // Make sure the marker property is cleared and rge marker animation is
       // set to off when the infowindow is closed.
